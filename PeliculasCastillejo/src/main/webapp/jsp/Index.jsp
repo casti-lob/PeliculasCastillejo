@@ -15,7 +15,7 @@
 		String password= request.getParameter("password");
 		Users user = new Users();
 		user.setNick(nick);
-		user.setNick(password);
+		user.setPassword(password);
 		
 		if(ConnectionDAO.validUser(user.getPassword())==true){
 			HttpSession sesion = request.getSession();

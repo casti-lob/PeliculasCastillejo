@@ -6,11 +6,14 @@
     <session-factory name="">
     	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     	<property name="hibernate.connection.password">jose</property>
- 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/peliculasCastillejo?useSSL=false</property>    
+ 		<property name="hibernate.connection.url">jdbc:mysql://localhost:8090/peliculasCastillejo?useSSL=false</property>    
  		<property name="hibernate.connection.username">castillejo</property>
  		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
  		<property name="hibernate.show_sql">true</property>
   		<property name="hibernate.format_sql">true</property>
   		<mapping class="com.jacaranda.Users"/>
+  		<mapping class="com.jacaranda.Category"/>
+  		<mapping class="com.jacaranda.Element"/>
+  		<mapping class="com.jacaranda.Product"/>
  </session-factory>
 </hibernate-configuration>
