@@ -20,13 +20,6 @@ public class ConnectionDAO {
 		session.close();
 	}
 	
-	//Metodo leer Usuario
-	public static boolean validUser(String password) {
-		boolean valid = false;
-		Users u = (Users) session.get(Users.class,password);
-		if(u != null) {
-			valid = true;
-		}
-		return valid;
-	}
+	
+
 }

@@ -1,7 +1,9 @@
+<%@page import="com.jacaranda.UserControl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.jacaranda.Users" %>
     <%@page import="com.jacaranda.ConnectionDAO" %>
+    <%@page import="com.jacaranda.UserControl" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +13,12 @@
 <body>
 	<%
 		String nick = request.getParameter("nick");
-		String password= request.getParameter("password");
+		int password= Integer.parseInt(request.getParameter("password"));
 		Users user = new Users();
 		user.setNick(nick);
-		user.setPassword(password);
+		user.setId(password);
 		
-		if(ConnectionDAO.validUser(user.getPassword())==true){
+		if(UserControl.validUser(password)==true){
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("login","true");
 			sesion.setAttribute("user",user);
