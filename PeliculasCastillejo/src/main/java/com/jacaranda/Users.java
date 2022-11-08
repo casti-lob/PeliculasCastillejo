@@ -19,8 +19,8 @@ public class Users {
 	private String date;
 	private boolean gender;
 	private boolean admin;
-	@OneToMany(mappedBy = "USERS")
-	private Set<Product> product;
+	
+	
 	
 	public Users() {
 		super();
@@ -88,13 +88,7 @@ public class Users {
 		this.admin = admin;
 	}
 
-	public Set<Product> getProduct() {
-		return product;
-	}
-
-	public void setProduct(Set<Product> product) {
-		this.product = product;
-	}
+	
 
 	@Override
 	public int hashCode() {
