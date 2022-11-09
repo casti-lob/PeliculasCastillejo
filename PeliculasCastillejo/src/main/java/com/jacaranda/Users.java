@@ -1,5 +1,7 @@
 package com.jacaranda;
 
+import java.sql.Date;
+
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -14,9 +16,10 @@ public class Users {
 	private String password;
 	private String name;
 	private String nick;
-	private String date;
+	private String dateUser;
 	private boolean gender;
 	private boolean admin;
+	
 	
 	
 	
@@ -26,6 +29,7 @@ public class Users {
 		this.password=null;
 		this.name=null;
 		this.nick=null;
+		this.dateUser=null;
 		this.gender=true;
 		this.admin=false;
 	}
@@ -63,11 +67,11 @@ public class Users {
 	}
 
 	public String getDate() {
-		return date;
+		return dateUser;
 	}
 
 	public void setDate(String date) {
-		this.date = date;
+		this.dateUser = date;
 	}
 
 	public boolean isGender() {

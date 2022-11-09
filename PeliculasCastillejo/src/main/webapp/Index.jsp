@@ -13,15 +13,16 @@
 <body>
 	<%
 		String nick = request.getParameter("nick");
-		int password= Integer.parseInt(request.getParameter("password"));
-		Users user = new Users();
-		user.setNick(nick);
-		user.setId(password);
+		String password=request.getParameter("password");
+		Users user = UserControl.getUser(nick, password);
+		/* user.setName(nick);
+		user.setId(password); */
 		
-		if(UserControl.validUser(password)==true){
+		if(UserControl.validUser(user.getId())==true){
 			HttpSession sesion = request.getSession();
 			sesion.setAttribute("login","true");
 			sesion.setAttribute("user",user);
+		
 		
 	%>
 		<jsp:forward page="Main.jsp"></jsp:forward>
