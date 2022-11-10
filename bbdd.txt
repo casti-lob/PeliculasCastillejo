@@ -1,6 +1,6 @@
 CREATE DATABASE peliculasCastillejo;
 CREATE TABLE peliculasCastillejo.USERS
-	(id 			int(8),
+	(id 			int(8) AUTO_INCREMENT,
     password 		VARCHAR(32),
 	name 		VARCHAR(200),
     nick		varchar(100),
@@ -11,13 +11,13 @@ CREATE TABLE peliculasCastillejo.USERS
 	);
     
 CREATE TABLE peliculasCastillejo.CATEGORY
-	(code_cat 		int(8), 
+	(code_cat 		int(8) AUTO_INCREMENT, 
      name 		varchar(100),
      description    varchar(300),
      CONSTRAINT pk_category PRIMARY KEY (code_cat)
     );
 CREATE TABLE peliculasCastillejo.ELEMENT
-	(code_ele 		int(8),
+	(code_ele 		int(8) AUTO_INCREMENT,
     name_ele		varchar(100) unique,
     description_ele varchar(300),
     price			double(8,3),

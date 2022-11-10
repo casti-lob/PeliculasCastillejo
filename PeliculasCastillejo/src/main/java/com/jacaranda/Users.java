@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 @Entity(name="USERS")
 public class Users {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String password;
 	private String name;
@@ -46,15 +49,23 @@ public class Users {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password)throws UserException {
+		if(password.length()>32||password.length()<1) {
+			throw new UserException("Contraseña demasiado larga o inexistente");
+		}else {
+			this.password = password;
+		}
+		
 	}
 
-	public String getName() {
+	public String getName(){
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)throws UserException {
+		if(name.length()>200|| name.length()<2) {
+			throw new UserException("Nombre de usuario demasiado largo o corto");
+		}
 		this.name = name;
 	}
 

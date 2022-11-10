@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 		
 		response.setContentType("text/html");
 		//Datos user
@@ -47,25 +47,37 @@ public class UserServlet extends HttpServlet {
 		String date = request.getParameter("date");
 		boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 		boolean admin = false;
-		//Encriptamos contraseña
+		//Encriptamos contraseï¿½a
 		String passwordEndcript = DigestUtils.md5Hex(password);
-		//Inserción de datos
+		//Inserciï¿½n de datos
 		Users user = new Users();
-		user.setPassword(passwordEndcript);
-		user.setName(name);
-		user.setNick(nick);
-		user.setDate(date);
-		user.setGender(gender);
-		user.setAdmin(admin);
+		try {
+			user.setPassword(passwordEndcript);
+			user.setName(name);
+			user.setNick(nick);
+			user.setDate(date);
+			user.setGender(gender);
+			user.setAdmin(admin);
+			
+			UserControl.addUser(user);
+			
+			PrintWriter out = response.getWriter();
+			out.println("<html><body>");
+			out.println("<h1>Usuario creado </h1>");
+			out.println("<h1>Bienvenido </h1>");
+			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+			out.println("</body></html>");
+			
+		} catch (UserException e) {
+			PrintWriter out = response.getWriter();
+			out.println("<html><body>");
+			out.println("<h1>Error </h1>");
+			out.println("<h3>"+e.getMessage()+"</h3>");
+			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+			out.println("</body></html>");
+			
+		}
 		
-		UserControl.addUser(user);
-		
-		PrintWriter out = response.getWriter();
-		out.println("<html><body>");
-		out.println("<h1>Usuario creado </h1>");
-		out.println("<h1>Bienvenido </h1>");
-		out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
-		out.println("</body></html>");
 	}
 
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -38,21 +40,25 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		
 		response.setContentType("text/html");
-		//Datos del formulario y creación de usuario
+		//Datos del formulario y creaciï¿½n de usuario
 		String nick = request.getParameter("nick");
 		String password=request.getParameter("password");
-		Users user = UserControl.getUser(nick, password);
+		//Encriptamos contraseï¿½a
+		String passwordEndcript = DigestUtils.md5Hex(password);
+		Users user = UserControl.getUser(nick, passwordEndcript);
 		
 		if(user !=null){
 			if(UserControl.validUser(user.getId())==true){	
 				HttpSession sesion = request.getSession();
 				sesion.setAttribute("login","true");
-				sesion.setAttribute("user",user);
+				sesion.setAttribute("user",user.getName());
 				PrintWriter out = response.getWriter();
 				out.println("<html><body>");
-				out.println("<h1>Lista de categorias</h1>");
+				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
+				out.println("<h1>Lista de articulos</h1>");
+				
 				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}}else{
