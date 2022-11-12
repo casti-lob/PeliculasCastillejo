@@ -73,7 +73,10 @@ public class Users {
 		return nick;
 	}
 
-	public void setNick(String nick) {
+	public void setNick(String nick)throws UserException {
+		if(nick.length()>100||nick.length()<2) {
+			throw new UserException("Nick demasiado largo o corto");
+		}
 		this.nick = nick;
 	}
 
@@ -81,7 +84,10 @@ public class Users {
 		return dateUser;
 	}
 
-	public void setDate(String date) {
+	public void setDate(String date) throws UserException {
+		if(date.equals(null)) {
+			throw new UserException("El campo fecha es necesario");
+		}
 		this.dateUser = date;
 	}
 

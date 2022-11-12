@@ -2,6 +2,7 @@ package com.jacaranda;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,14 +51,41 @@ public class LoginServlet extends HttpServlet {
 		Users user = UserControl.getUser(nick, passwordEndcript);
 		
 		if(user !=null){
+			//Validamos o no al usuario
 			if(UserControl.validUser(user.getId())==true){	
 				HttpSession sesion = request.getSession();
 				sesion.setAttribute("login","true");
 				sesion.setAttribute("user",user.getName());
 				PrintWriter out = response.getWriter();
 				out.println("<html><body>");
+				//Bienvenida al usuario
 				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
 				out.println("<h1>Lista de articulos</h1>");
+				//Tabla de artículos
+				
+				out.println("<table border=\"1px\">\r\n"
+						+ "    <tr>\r\n"
+						+ "        <td>\r\n"
+						+ "            Nombre\r\n"
+						+ "        </td>\r\n"
+						+ "        <td>\r\n"
+						+ "            Descripción\r\n"
+						+ "        </td>\r\n"
+						+ "        <td>\r\n"
+						+ "            Precio\r\n"
+						+ "        </td>\r\n"
+						+ "        \r\n"
+						+ "    </tr>");
+				
+				List<Element> element = ElementControl.getListElement();
+				for(Element i: element) {
+					out.println("<tr><td>"+i.getName_ele()+"</td>\r\n"
+							+ "<td>"+i.getDescription_ele()+"</td>\r\n"
+							+ "<td>"+i.getPrice()+"</td>\r\n"
+							+"<td> <a href=''>Modificar</a></td>\r\n"
+							+"<td> <a href=''>Eliminar</a></td></tr></table>");
+					
+				}
 				
 				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
 				out.println("</body></html>");

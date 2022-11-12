@@ -1,12 +1,16 @@
 package com.jacaranda;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity(name="ELEMENT")
 public class Element {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int code_ele;
 	private String name_ele;
 	private String description_ele;
@@ -23,7 +27,7 @@ public class Element {
 		return code_ele;
 	}
 
-	public void setCode_ele(int code_ele) {
+	public void setCode_ele(int code_ele)  {
 		this.code_ele = code_ele;
 	}
 
@@ -31,7 +35,10 @@ public class Element {
 		return name_ele;
 	}
 
-	public void setName_ele(String name_ele) {
+	public void setName_ele(String name_ele) throws ElementException {
+		if(name_ele.length()>100||name_ele.length()<2) {
+			throw new ElementException("Nombre del elemento demasiado largo o corto");
+		}
 		this.name_ele = name_ele;
 	}
 
@@ -39,7 +46,10 @@ public class Element {
 		return description_ele;
 	}
 
-	public void setDescription_ele(String description_ele) {
+	public void setDescription_ele(String description_ele) throws ElementException {
+		if(description_ele.length()>300||description_ele.length()<2) {
+			throw new ElementException("Descripcion del elemento demasiado larga o corta");
+		}
 		this.description_ele = description_ele;
 	}
 
@@ -47,7 +57,10 @@ public class Element {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(double price) throws ElementException{
+		if(price<=0.5) {
+			throw new ElementException("El precio no puede ser inferior a 0.5");
+		}
 		this.price = price;
 	}
 
