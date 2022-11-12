@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 				out.println("<html><body>");
 				//Bienvenida al usuario
 				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
-				out.println("<h1>Lista de articulos</h1>");
+				out.println("<h1>Lista de artículos   <a href='/PeliculasCastillejo/html/AddElement.html'>Añadir artículo</a>");
 				//Tabla de artículos
 				
 				out.println("<table border=\"1px\">\r\n"
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 						+ "            Precio\r\n"
 						+ "        </td>\r\n"
 						+ "        \r\n"
-						+ "    </tr>");
+						+ "        <td colspan=2>Acciones</td></tr>");
 				
 				List<Element> element = ElementControl.getListElement();
 				for(Element i: element) {
@@ -83,10 +83,10 @@ public class LoginServlet extends HttpServlet {
 							+ "<td>"+i.getDescription_ele()+"</td>\r\n"
 							+ "<td>"+i.getPrice()+"</td>\r\n"
 							+"<td> <a href=''>Modificar</a></td>\r\n"
-							+"<td> <a href=''>Eliminar</a></td></tr></table>");
+							+"<td> <a href=''>Eliminar</a></td></tr>");
 					
 				}
-				
+				out.println("</table>");
 				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}}else{

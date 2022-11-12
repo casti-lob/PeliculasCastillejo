@@ -2,6 +2,7 @@ package com.jacaranda;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class ElementControl {
@@ -16,5 +17,12 @@ public class ElementControl {
 		Query<Element> query= ConnectionDAO.getSession().createQuery("SELECT e FROM com.jacaranda.Element e");
 		List<Element> element = (List<Element>) query.getResultList();
 		return element;
+	}
+	
+	public static void saveElement(Element element) {
+		Session session = ConnectionDAO.getSession();
+		session.getTransaction().begin();
+		session.save(element);
+		session.getTransaction().commit();
 	}
 }
