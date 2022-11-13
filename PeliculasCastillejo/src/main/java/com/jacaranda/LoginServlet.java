@@ -82,8 +82,8 @@ public class LoginServlet extends HttpServlet {
 					out.println("<tr><td>"+i.getName_ele()+"</td>\r\n"
 							+ "<td>"+i.getDescription_ele()+"</td>\r\n"
 							+ "<td>"+i.getPrice()+"</td>\r\n"
-							+"<td> <a href=''>Modificar</a></td>\r\n"
-							+"<td> <a href=''>Eliminar</a></td></tr>");
+							+"<td> <a href='/PeliculasCastillejo/jsp/ModElement.jsp?id="+i.getCode_ele()+"'>Modificar</a></td>\r\n"
+							+"<td> <a href='/PeliculasCastillejo/jsp/DeletElement.jsp?id="+i.getCode_ele()+"'>Eliminar</a></td></tr>");
 					
 				}
 				out.println("</table>");

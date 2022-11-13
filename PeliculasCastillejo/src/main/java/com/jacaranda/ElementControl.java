@@ -21,8 +21,34 @@ public class ElementControl {
 	
 	public static void saveElement(Element element) {
 		Session session = ConnectionDAO.getSession();
+		try {
 		session.getTransaction().begin();
 		session.save(element);
 		session.getTransaction().commit();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void updateElement(Element element) {
+		Session session = ConnectionDAO.getSession();
+		try {
+		session.getTransaction().begin();
+		session.update(element);
+		session.getTransaction().commit();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void deleteElement(Element element) {
+		Session session = ConnectionDAO.getSession();
+		try {
+			session.getTransaction().begin();
+			session.delete(element);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

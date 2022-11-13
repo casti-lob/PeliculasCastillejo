@@ -63,8 +63,10 @@ public class AddElementServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<h1>Elemento Creado</h1>");
 		} catch (ElementException e1) {
+			PrintWriter out = response.getWriter();
+			out.println("<h1>Error</h1>");
+			out.println("<h1>"+e1.getMessage()+"</h1>");
 			
-			e1.printStackTrace();
 		}
 		
 	}
@@ -83,7 +85,8 @@ public class AddElementServlet extends HttpServlet {
 				Files.copy(input, file.toPath());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+
+			e.getMessage();
 		}
 		return pathAbsolute;
 	}
