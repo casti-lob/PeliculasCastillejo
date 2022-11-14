@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.Session;
 
 /**
  * Servlet implementation class LoginServlet
@@ -28,19 +29,21 @@ public class LoginServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
+			Session session = ConnectionDAO.getSession();
+		} catch (Exception e) {
+			PrintWriter out = response.getWriter();
+			out.println("<html><body>");
+			out.println("<h1>Fallo en la conexion</h1>");
+			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+			out.println("</body></html>");
+		}
 		
 		response.setContentType("text/html");
 		//Datos del formulario y creaciï¿½n de usuario
@@ -60,8 +63,8 @@ public class LoginServlet extends HttpServlet {
 				out.println("<html><body>");
 				//Bienvenida al usuario
 				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
-				out.println("<h1>Lista de artículos   <a href='/PeliculasCastillejo/html/AddElement.html'>Añadir artículo</a>");
-				//Tabla de artículos
+				out.println("<h1>Lista de artï¿½culos   <a href='/PeliculasCastillejo/html/AddElement.html'>Aï¿½adir artï¿½culo</a>");
+				//Tabla de artï¿½culos
 				
 				out.println("<table border=\"1px\">\r\n"
 						+ "    <tr>\r\n"
@@ -69,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 						+ "            Nombre\r\n"
 						+ "        </td>\r\n"
 						+ "        <td>\r\n"
-						+ "            Descripción\r\n"
+						+ "            Descripciï¿½n\r\n"
 						+ "        </td>\r\n"
 						+ "        <td>\r\n"
 						+ "            Precio\r\n"
