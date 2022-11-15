@@ -64,6 +64,7 @@ public class LoginServlet extends HttpServlet {
 				//Bienvenida al usuario
 				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
 				out.println("<h1>Lista de art�culos   <a href='/PeliculasCastillejo/html/AddElement.html'>A�adir art�culo</a>");
+				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
 				//Tabla de art�culos
 				
 				out.println("<table border=\"1px\">\r\n"
@@ -78,15 +79,14 @@ public class LoginServlet extends HttpServlet {
 						+ "            Precio\r\n"
 						+ "        </td>\r\n"
 						+ "        \r\n"
-						+ "        <td colspan=2>Acciones</td></tr>");
+						        );
 				
 				List<Element> element = ElementControl.getListElement();
 				for(Element i: element) {
 					out.println("<tr><td>"+i.getName_ele()+"</td>\r\n"
 							+ "<td>"+i.getDescription_ele()+"</td>\r\n"
-							+ "<td>"+i.getPrice()+"</td>\r\n"
-							+"<td> <a href='/PeliculasCastillejo/jsp/ModElement.jsp?id="+i.getCode_ele()+"'>Modificar</a></td>\r\n"
-							+"<td> <a href='/PeliculasCastillejo/jsp/DeletElement.jsp?id="+i.getCode_ele()+"'>Eliminar</a></td></tr>");
+							+ "<td>"+i.getPrice()+"</td></tr>");
+							
 					
 				}
 				out.println("</table>");
@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println("<html><body>");
 				out.println("<h1>Error al loguearte</h1>");
-				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+				
 				out.println("</body></html>");
 			}
 	}

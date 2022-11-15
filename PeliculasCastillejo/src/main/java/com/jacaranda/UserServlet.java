@@ -41,9 +41,9 @@ public class UserServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		//Datos user
-		String password = request.getParameter("password");
-		String name = request.getParameter("name");
-		String nick =request.getParameter("nick");
+		String password = request.getParameter("password").trim();
+		String name = request.getParameter("name").trim();
+		String nick =request.getParameter("nick").trim();
 		String date = request.getParameter("date");
 		boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 		boolean admin = false;
@@ -58,15 +58,24 @@ public class UserServlet extends HttpServlet {
 			user.setDate(date);
 			user.setGender(gender);
 			user.setAdmin(admin);
+			if(UserControl.addUser(user)) {
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h1>Usuario creado </h1>");
+				out.println("<h1>Bienvenido </h1>");
+				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+				out.println("</body></html>");
+			}else {
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h1>Error nick de usuario ya existente </h1>");
+
+				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+				out.println("</body></html>");
+			}
 			
-			UserControl.addUser(user);
 			
-			PrintWriter out = response.getWriter();
-			out.println("<html><body>");
-			out.println("<h1>Usuario creado </h1>");
-			out.println("<h1>Bienvenido </h1>");
-			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
-			out.println("</body></html>");
+			
 			
 		} catch (UserException e) {
 			PrintWriter out = response.getWriter();
