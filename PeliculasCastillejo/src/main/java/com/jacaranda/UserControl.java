@@ -36,7 +36,7 @@ public class UserControl {
 	
 	public static boolean addUser(Users user) {
 		boolean add = false;
-		if(userIsCreate(user)) {
+		if(userIsCreate(user)==false) {
 			try {
 				ConnectionDAO.getSession().getTransaction().begin();
 				ConnectionDAO.getSession().save(user);
@@ -51,16 +51,18 @@ public class UserControl {
 	}
 	
 	public static boolean userIsCreate(Users user) {
-		boolean create=false;
+		boolean create=true;
 		Users oldUser= new Users();
 		Session session = ConnectionDAO.getSession();
 		//Un usuario puede tener la misma contraseña y el mismo nombre pero no el mismo nick
 		Query<Users> query=session.createQuery("SELECT u FROM com.jacaranda.Users u WHERE u.nick LIKE'"+user.getNick()+"'");
 		try {
+		
 		oldUser = query.getSingleResult();
+		//Si no da fallo al hacer la query es porque existe el nick y da fallo es porque no existe
 		}catch (Exception e) {
-			session.getTransaction().rollback();
-			create= true;
+			
+			create=false;
 		}
 		return create;
 	}

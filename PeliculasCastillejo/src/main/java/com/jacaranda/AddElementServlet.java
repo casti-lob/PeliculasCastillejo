@@ -32,17 +32,57 @@ public class AddElementServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		
 		Category c = new Category();
+		
 		String nameElement = request.getParameter("name");
 		String descriptionElement=request.getParameter("description");
 		int price=Integer.parseInt(request.getParameter("price")) ;
 		String category= request.getParameter("category");
+		
 		Element element= new Element();
-		element.setName_ele(nameElement);
-		element.setDescription_ele(descriptionElement);
-		element.setPrice(price);
-		element.setCateg(c);
-		if(ElementControl.saveElement(null))
+		
+		try {
+			element.setName_ele(nameElement);
+			element.setDescription_ele(descriptionElement);
+			element.setPrice(price);
+			
+			c= CategoryControl.getCategoryforName(category);
+			
+			if(c!=null) {
+				element.setCateg(c);
+				
+				if(ElementControl.saveElement(element)) {
+					PrintWriter out = response.getWriter();
+					out.println("<html><body>");
+					out.println("<h1>Articulo añadido</h1>");
+					out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+					out.println("</body></html>");
+				}
+			}else {
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h1>Categoria no encontrada</h1>");
+				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+				out.println("</body></html>");
+			}
+			
+		} catch (ElementException e) {
+			// TODO Auto-generated catch block
+			PrintWriter out = response.getWriter();
+			out.println("<html><body>");
+			out.println("<h1>Error</h1>");
+			out.println("<h1>"+e.getMessage()+"</h1>");
+			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+			out.println("</body></html>");
+			
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		

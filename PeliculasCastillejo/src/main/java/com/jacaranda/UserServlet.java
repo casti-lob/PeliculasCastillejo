@@ -25,13 +25,7 @@ public class UserServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,8 +39,12 @@ public class UserServlet extends HttpServlet {
 		String name = request.getParameter("name").trim();
 		String nick =request.getParameter("nick").trim();
 		String date = request.getParameter("date");
-		boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+		String gender = request.getParameter("gender");
 		boolean admin = false;
+		boolean sex=true;
+		if(gender.equals("Masculino")) {
+			sex=false;
+		}
 		//Encriptamos contrase�a
 		String passwordEndcript = DigestUtils.md5Hex(password);
 		//Inserci�n de datos
@@ -56,8 +54,9 @@ public class UserServlet extends HttpServlet {
 			user.setName(name);
 			user.setNick(nick);
 			user.setDate(date);
-			user.setGender(gender);
+			user.setGender(sex);
 			user.setAdmin(admin);
+			
 			if(UserControl.addUser(user)) {
 				PrintWriter out = response.getWriter();
 				out.println("<html><body>");

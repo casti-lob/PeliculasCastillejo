@@ -1,13 +1,23 @@
 package com.jacaranda;
 
+import java.util.List;
+
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class CategoryControl {
 	
-	public static Category getCategory(int id) {
+	public static Category getCategoryforName(String name) {
 		Session session = ConnectionDAO.getSession();
-		Category category= (Category) session.get(Category.class,id);
-		return category;
+		Category c = new Category();
+		Query<Category> query=session.createQuery("SELECT u FROM com.jacaranda.Category u WHERE u.name LIKE'"+name+"'");
+		try {
+			c = query.getSingleResult();
+			}catch (Exception e) {
+				c=null;
+			}
+		return c;
+		
 	}
 	
 	

@@ -19,15 +19,19 @@ public class ElementControl {
 		return element;
 	}
 	
-	public static void saveElement(Element element) {
+	public static boolean saveElement(Element element) {
+		boolean add = false;
 		Session session = ConnectionDAO.getSession();
 		try {
 		session.getTransaction().begin();
 		session.save(element);
 		session.getTransaction().commit();
+		add=true;
+		
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return add;
 	}
 	
 	public static void updateElement(Element element) {

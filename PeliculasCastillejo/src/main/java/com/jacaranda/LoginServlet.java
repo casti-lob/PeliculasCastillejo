@@ -35,15 +35,9 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
+		
 			Session session = ConnectionDAO.getSession();
-		} catch (Exception e) {
-			PrintWriter out = response.getWriter();
-			out.println("<html><body>");
-			out.println("<h1>Fallo en la conexion</h1>");
-			out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
-			out.println("</body></html>");
-		}
+		
 		
 		response.setContentType("text/html");
 		//Datos del formulario y creaci�n de usuario
