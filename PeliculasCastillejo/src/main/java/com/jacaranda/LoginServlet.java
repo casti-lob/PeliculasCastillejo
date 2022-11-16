@@ -41,8 +41,8 @@ public class LoginServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		//Datos del formulario y creaci�n de usuario
-		String nick = request.getParameter("nick");
-		String password=request.getParameter("password");
+		String nick = request.getParameter("nick").trim();
+		String password=request.getParameter("password").trim();
 		//Encriptamos contrase�a
 		String passwordEndcript = DigestUtils.md5Hex(password);
 		Users user = UserControl.getUser(nick, passwordEndcript);
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 				out.println("<html><body>");
 				//Bienvenida al usuario
 				out.println("<h1>Bienvenido "+user.getName()+" </h1>");
-				out.println("<h1>Lista de art�culos   <a href='/PeliculasCastillejo/html/AddElement.html'>A�adir art�culo</a>");
+				out.println("<h1>Lista de articulos   <a href='/PeliculasCastillejo/html/AddElement.html'>Anadir articulo</a>");
 				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
 				//Tabla de art�culos
 				

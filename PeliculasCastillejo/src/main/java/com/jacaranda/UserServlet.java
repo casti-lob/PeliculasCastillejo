@@ -62,7 +62,7 @@ public class UserServlet extends HttpServlet {
 				out.println("<html><body>");
 				out.println("<h1>Usuario creado </h1>");
 				out.println("<h1>Bienvenido </h1>");
-				out.println("<a href='/PeliculasCastillejo/html/Index.html'>Atras</a>");
+				out.println("<a href='PeliculasCastillejo/html/Index.html'>Atras</a>");
 				out.println("</body></html>");
 			}else {
 				PrintWriter out = response.getWriter();
